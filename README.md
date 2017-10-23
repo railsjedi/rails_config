@@ -257,6 +257,8 @@ application initialization phase:
 ```ruby
 Config.setup do |config|
   config.const_name = 'Settings'
+  config.knockout_prefix = nil
+  config.prepend_sources = ["path_to_some_custom_settings_to_prepend.yml"]
   ...
 end
 ```
@@ -300,6 +302,10 @@ between the schema and your config.
 Check [dry-validation](https://github.com/dry-rb/dry-validation) for more details.
 
 ### Environment variables
+
+Prepend sources
+
+* `prepend_sources` - ability to prepend settings via Config without the need to reload settings after they run once.
 
 See section below for more details.
 

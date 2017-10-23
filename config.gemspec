@@ -30,6 +30,8 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency 'bundler',     '~> 1.13',  '>= 1.13.6'
   s.add_development_dependency 'rake',        '~> 12.0',  '>= 12.0.0'
+  s.add_development_dependency 'rdoc'
+  s.add_development_dependency 'pry'
 
   # Testing
   s.add_development_dependency 'appraisal',   '~> 2.1',   '>= 2.1.0'
