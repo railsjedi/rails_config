@@ -1,3 +1,7 @@
+unless ENV['GITHUB_ACTIONS']
+  require 'byebug'
+end
+
 ENV['RAILS_ENV'] ||= 'test'
 
 puts "RUBY_ENGINE: #{RUBY_ENGINE}"

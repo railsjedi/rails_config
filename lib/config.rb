@@ -25,6 +25,7 @@ module Config
     overwrite_arrays: true,
     merge_hash_arrays: false,
     validation_contract: nil,
+    environment: nil,
     evaluate_erb_in_yaml: true
   )
 
@@ -44,7 +45,6 @@ module Config
     end
 
     config.add_source!(Sources::EnvSource.new(ENV)) if Config.use_env
-
     config.load!
     config
   end

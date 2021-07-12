@@ -12,25 +12,25 @@ Config helps you easily manage environment specific settings in an easy and usab
 
 ## Features
 
-* simple YAML config files
-* config files support ERB
-* config files support inheritance and multiple environments
-* access config information via convenient object member notation
-* support for multi-level settings (`Settings.group.subgroup.setting`)
-* local developer settings ignored when committing the code
+- simple YAML config files
+- config files support ERB
+- config files support inheritance and multiple environments
+- access config information via convenient object member notation
+- support for multi-level settings (`Settings.group.subgroup.setting`)
+- local developer settings ignored when committing the code
 
 ## Compatibility
 
 Current version supports and is [tested](.github/workflows/tests.yml#L19) for the following interpreters and frameworks:
 
-* Interpreters
-  * [Ruby](https://www.ruby-lang.org) `>= 2.4`
-  * [JRuby](https://www.jruby.org) `>= 9.2`
-  * [TruffleRuby](https://github.com/oracle/truffleruby) `>= 19.3`
-* Application frameworks
-  * Rails `>= 4.2`, `5` and `6`
-  * Padrino
-  * Sinatra
+- Interpreters
+  - [Ruby](https://www.ruby-lang.org) `>= 2.4`
+  - [JRuby](https://www.jruby.org) `>= 9.2`
+  - [TruffleRuby](https://github.com/oracle/truffleruby) `>= 19.3`
+- Application frameworks
+  - Rails `>= 4.2`, `5` and `6`
+  - Padrino
+  - Sinatra
 
 For Ruby `2.0` to `2.3` or Rails `3` to `4.1` use version `1.x` of this gem. For older versions of Rails or Ruby use [AppConfig](http://github.com/fredwu/app_config).
 
@@ -51,6 +51,8 @@ which will generate customizable config file `config/initializers/config.rb` and
     config/settings/test.yml
 
 You can now edit them to adjust to your needs.
+
+> Note: By default, the config environment will match the Rails environment (`Rails.env`). This can be changed by setting `config.environment`.
 
 ### Installing on Padrino
 
@@ -209,21 +211,21 @@ Embedded Ruby is allowed in the YAML configuration files. ERB will be evaluated 
 
 Consider the two following config files.
 
-* ```#{Rails.root}/config/settings.yml```
+- `#{Rails.root}/config/settings.yml`
 
 ```yaml
 size: 1
 server: google.com
 ```
 
-* ```#{Rails.root}/config/environments/development.yml```
+- `#{Rails.root}/config/environments/development.yml`
 
 ```yaml
 size: 2
 computed: <%= 1 + 2 + 3 %>
 section:
   size: 3
-  servers: [ {name: yahoo.com}, {name: amazon.com} ]
+  servers: [{ name: yahoo.com }, { name: amazon.com }]
 ```
 
 Notice that the environment specific config entries overwrite the common entries.
@@ -267,15 +269,16 @@ After installing `Config` in Rails, you will find automatically generated file t
 
 ### General
 
-* `const_name` - name of the object holing you settings. Default: `'Settings'`
-* `evaluate_erb_in_yaml` - evaluate ERB in YAML config files. Set to false if the config file contains ERB that should not be evaluated at load time. Default: `true`
+- `const_name` - name of the object holding you settings. Default: `'Settings'`
+- `environment` - define current environment, affecting which settings file will be loaded. Default: `Rails.env`
+- `evaluate_erb_in_yaml` - evaluate ERB in YAML config files. Set to false if the config file contains ERB that should not be evaluated at load time. Default: `true`
 
 ### Merge customization
 
-* `overwrite_arrays` - overwrite arrays found in previously loaded settings file. Default: `true`
-* `merge_hash_arrays` - merge hashes inside of arrays from previously loaded settings files. Makes sense only when `overwrite_arrays = false`. Default: `false`
-* `knockout_prefix` - ability to remove elements of the array set in earlier loaded settings file. Makes sense only when `overwrite_arrays = false`, otherwise array settings would be overwritten by default. Default: `nil`
-* `merge_nil_values` - `nil` values will overwrite an existing value when merging configs. Default: `true`.
+- `overwrite_arrays` - overwrite arrays found in previously loaded settings file. Default: `true`
+- `merge_hash_arrays` - merge hashes inside of arrays from previously loaded settings files. Makes sense only when `overwrite_arrays = false`. Default: `false`
+- `knockout_prefix` - ability to remove elements of the array set in earlier loaded settings file. Makes sense only when `overwrite_arrays = false`, otherwise array settings would be overwritten by default. Default: `nil`
+- `merge_nil_values` - `nil` values will overwrite an existing value when merging configs. Default: `true`.
 
 ```ruby
 # merge_nil_values is true by default
@@ -448,12 +451,12 @@ To upload your local values to Heroku you could ran `bundle exec rake config:her
 
 You can customize how environment variables are processed:
 
-* `env_prefix` (default: `const_name`) - load only ENV variables starting with this prefix (case-sensitive)
-* `env_separator` (default: `'.'`)  - what string to use as level separator - default value of `.` works well with   Heroku, but you might want to change it for example for `__` to easy override settings from command line, where using   dots in variable names might not be allowed (eg. Bash)
-* `env_converter` (default: `:downcase`)  - how to process variables names:
-  * `nil` - no change
-  * `:downcase` - convert to lower case
-* `env_parse_values` (default: `true`) - try to parse values to a correct type (`Boolean`, `Integer`, `Float`, `String`)
+- `env_prefix` (default: `const_name`) - load only ENV variables starting with this prefix (case-sensitive)
+- `env_separator` (default: `'.'`) - what string to use as level separator - default value of `.` works well with Heroku, but you might want to change it for example for `__` to easy override settings from command line, where using dots in variable names might not be allowed (eg. Bash)
+- `env_converter` (default: `:downcase`) - how to process variables names:
+  - `nil` - no change
+  - `:downcase` - convert to lower case
+- `env_parse_values` (default: `true`) - try to parse values to a correct type (`Boolean`, `Integer`, `Float`, `String`)
 
 For instance, given the following environment:
 
@@ -492,7 +495,7 @@ For example, the plaintext secret might look like this:
 ```json
 {
   "Settings.foo": "hello",
-  "Settings.bar": "world",
+  "Settings.bar": "world"
 }
 ```
 
@@ -535,10 +538,10 @@ Any and all contributions offered in any form, past present or future are unders
 
 ## Authors
 
-* [Piotr Kuczynski](http://github.com/pkuczynski)
-* [Fred Wu](http://github.com/fredwu)
-* [Jacques Crocker](http://github.com/railsjedi)
-* Inherited from [AppConfig](http://github.com/cjbottaro/app_config) by [Christopher J. Bottaro](http://github.com/cjbottaro)
+- [Piotr Kuczynski](http://github.com/pkuczynski)
+- [Fred Wu](http://github.com/fredwu)
+- [Jacques Crocker](http://github.com/railsjedi)
+- Inherited from [AppConfig](http://github.com/cjbottaro/app_config) by [Christopher J. Bottaro](http://github.com/cjbottaro)
 
 ## Contributors
 
